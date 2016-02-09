@@ -40,8 +40,12 @@ Arduino support
     sudo apt-get install python python-dev cmake autoconf
 
 
-## Now you can install the vimrc:
-just using a single command
+## Now you can install the vimrc
+### for build pre-sanity check
+    
+    export CXX=g++ CC=gcc ; unset CFLAGS CXXFLAGS LDLIBS
+
+jus using a single command
 
     curl https://raw.githubusercontent.com/ehzShelter/shelterVim/master/install.sh | cat > shelterVim.sh && bash shelterVim.sh && rm -f ./shelterVim.sh
 

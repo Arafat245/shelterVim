@@ -9,7 +9,7 @@ echo -n "Are you sure to install this(y/n)"
 read answer
 if echo "$answer" | grep -iq "^y" ; then
     if [ ! -d ~/.vim ]; then
-        mkdir -p ~/.vim 
+        mkdir -p ~/.vim
 
     else
         echo "there is already an $HOME/.vim directory in your $HOME folder"
