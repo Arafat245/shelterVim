@@ -70,7 +70,7 @@ Other available (awesome) colorschemes:
 For some reason you may need my dotfiles
 SEE my ehzShelter/dotMethod repo
 
-## YCM
+## YCM in case of NEED
 for YCM go to ~/.vim/bundle/YouCompleteMe/
 
     git submodule update --init --recursive

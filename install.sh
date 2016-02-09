@@ -39,6 +39,8 @@ echo please wait....
 git clone --quiet https://github.com/ehzShelter/shelterVim ~/.vim
 git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
+echo symbolic linked .vimrc done
+
 if [ -f ~/.vim/.vimrc ]; then
     ln -f -s ~/.vim/.vimrc ~/.vimrc
 else
@@ -47,9 +49,11 @@ else
 fi
 
 vim +BundleInstall +qall < /dev/tty # necessary to avoid vim: Input not from terminal warning
-echo symbolic linked .vimrc done
 echo
 echo Installed vim plugins "(could take a while)"
+echo Be patient there is so much dependices May be or NOT
+
+~/.vim/bundle/YouCompleteMe/install.py --clang-completer
 
 echo -e "\[\e[1;32m\]Everything succesfully installed.\[\e[0m\]"
 echo " THANK YOU :) :) "
