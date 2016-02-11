@@ -318,6 +318,7 @@ let g:syntastic_c_compiler = 'clang'
 let g:syntastic_c_compiler_options = ' -std=c11 -Wall -Werror -pedantic-errors '
 
 " Syntastic Plugin C++14 support for Clang Compiler
+" Make sure clang have system path
 let g:syntastic_cpp_compiler = 'clang++'
 " let g:syntastic_cpp_compiler = 'g++'
 " flags more specific to clang
@@ -372,17 +373,19 @@ augroup sourceCodeC
   autocmd FileType c nnoremap <leader>bb :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors *.c -o %:r<CR>
   autocmd FileType c nnoremap <leader>bn :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors -o<space>
   autocmd FileType c nnoremap <leader>r :! ./
+  autocmd FileType c nnoremap <leader>rr :! ./%:r<CR>
 augroup END
 
 augroup sourceCodeCPP
   autocmd!
-  autocmd FileType cpp nnoremap <leader>b :! make %:r<CR>
+  autocmd FileType cc,cpp nnoremap <leader>b :! make %:r<CR>
 
-  autocmd FileType cpp nnoremap <leader>bb :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 *.cpp -o %:r<CR>
+  autocmd FileType cc,cpp nnoremap <leader>bb :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 *.cpp -o %:r<CR>
 
-  autocmd FileType cpp nnoremap <leader>bn :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 -o<space>
+  autocmd FileType cc,cpp nnoremap <leader>bn :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 -o<space>
 
-  autocmd FileType cpp nnoremap <leader>r :! ./
+  autocmd FileType cc,cpp nnoremap <leader>r :! ./
+  autocmd FileType cc,cpp nnoremap <leader>rr :! ./%:r<CR>
 augroup END
 
 " Better for javac
