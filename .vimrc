@@ -22,8 +22,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Vim Latex support
-Plugin 'lervag/vimtex'
+" Plugin 'lervag/vimtex'
 " color schemes
+Plugin 'w0ng/vim-hybrid'
 Plugin 'neitanod/vim-clevertab'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'hukl/Smyck-Color-Scheme'
@@ -144,7 +145,7 @@ endif
 " font options
 set background=dark
 set t_Co=256
-colorscheme smyck
+colorscheme hybrid
 
 " keep at least 5 lines below the cursor
 set scrolloff=5
@@ -773,7 +774,7 @@ endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
 
 " CtrlP -> files matched are ignored when expanding wildcards
-set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store,*~/.vim/view/*
 
 set wildignorecase
 
@@ -1066,8 +1067,9 @@ au BufRead,BufNewFile *.asm set filetype=nasm
 " find recursively relative path though your project folder
 " like tree Data Structure
 set path=$PWD/**
+set path+=$HOME/**
 set path+=/usr/include/c++/v1**
-set path+=/usr/local/include
+" set path+=/usr/local/include
 
 " best tab file navigation ,ft
 " best split file navigation ,fs
