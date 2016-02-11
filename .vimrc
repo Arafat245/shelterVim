@@ -1077,7 +1077,7 @@ set path+=/usr/include/c++/v1**
 
 nnoremap <leader>ft :tabfind<space>
 nnoremap <leader>fs :sfind<space>
-nnoremap <leader>f :find<space>
+nnoremap <leader>ff :find<space>
 
 " Damian Conway's  Blink function
 nnoremap <silent> n n:call HLNext(0.1)<cr>
