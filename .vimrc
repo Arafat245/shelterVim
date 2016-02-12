@@ -760,7 +760,7 @@ augroup ctrlp_config
     \ 'fallback': 'find %s -type f'
   \ }
   let g:ctrlp_match_window = 'top,order:btt'
-  let g:ctrlp_working_path_mode = 'r'
+  let g:ctrlp_working_path_mode = 'ra'
   let g:ctrlp_use_caching = 1
   let g:ctrlp_clear_cache_on_exit = 1
   let g:ctrlp_lazy_update = 350 " Set delay to prevent extra search
@@ -1216,3 +1216,7 @@ cnoremap <c-d> <Del>
 " endf
 
 " au Filetype python nnoremap <leader>f :silent call PyFix()
+"
+" C or CPP header abbrebiation complete
+ab #i #include
+ab #d #define
