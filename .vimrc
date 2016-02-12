@@ -31,7 +31,6 @@ Plugin 'hukl/Smyck-Color-Scheme'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'regedarek/ZoomWin'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'kien/rainbow_parentheses.vim'
 " Plugins for javascript library and modern syntax
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
@@ -64,7 +63,6 @@ Plugin 'tpope/vim-commentary'
 " Plugin 'xsbeats/vim-blade'
 Plugin 'ap/vim-css-color'
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'ervandew/supertab'
 Plugin 'gregsexton/gitv'
 Plugin 'jplaut/vim-arduino-ino'
@@ -197,7 +195,6 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 
-" ,ep: open file in new tab CtrlP
 " ,g: ctags go to definition in new tab
 " ,G: ctags go to definition in new buffer
 " ,tp: toggle paste mode
@@ -218,7 +215,6 @@ nnoremap <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
 nnoremap <silent> <leader>, o<Esc>
 
 nnoremap <leader>nt :tabedit <c-r>=expand("%:p:h")<cr>/
-nnoremap <leader>ep  :tabnew<CR>:CtrlP<CR>
 nnoremap <leader>g  <C-w><C-]><C-w>T
 nnoremap <leader>G  <C-]>
 nnoremap <leader>ts :SyntasticToggleMode<CR>
@@ -440,14 +436,13 @@ augroup SourcePython
     set listchars=tab:>.,trail:.,extends:#,nbsp:.
 augroup END
 
-"
 " cursorline
 " set cursorline
 
 " Match angle bracket
 set matchpairs+=<:>
 
-" " vim statusline when ~$vim --noplugin and airline is not active
+" " vim statusline when ~$vim --noplugin and if you don't like airline vim
 " set statusline=   " clear the statusline for when vimrc is reloaded
 " set statusline+=%-10.3n\                      " buffer number
 " set statusline+=%f\                          " file name
@@ -536,42 +531,6 @@ highlight StatusLine term=bold  ctermfg=black ctermbg=101
 " highlight StatusLineNC term=bold  ctermfg=2 ctermbg=black
 " highlight CursorLine term=bold cterm=NONE
 highlight cursorcolumn term=bold ctermfg=cyan ctermbg=black
-
-" So use TMUX with netrw if you like
-
-" " An interesting set of netrw setting
-" let g:netrw_liststyle = 3
-" let g:netrw_winsize   = 25
-" let g:netrw_browse_split = 3
-" let g:netrw_keepdir = 0
-" let g:netrw_use_noswf = 0
-" let g:netrw_chgwin = winnr()
-" let g:netrw_altv = 1
-" let g:netrw_mousemaps = 0
-" let g:netrw_banner = 0
-" let g:netrw_nogx = 1
-
-" " toggle tree
-" " Toggle Vexplore with ,tt
-" function! ToggleVExplorer()
-"     if exists("t:expl_buf_num")
-"         let expl_win_num = bufwinnr(t:expl_buf_num)
-"         if expl_win_num != -1
-"             let cur_win_nr = winnr()
-"             exec expl_win_num . 'wincmd w'
-"             close
-"             exec cur_win_nr . 'wincmd w'
-"             unlet t:expl_buf_num
-"         else
-"             unlet t:expl_buf_num
-"         endif
-"     else
-"         exec '1wincmd w'
-"         Vexplore
-"         let t:expl_buf_num = bufnr("%")
-"     endif
-" endfunction
-" command! ToggleVExplorer :call ToggleVExplorer()
 
 " NERDtreetab toggle using ,l.. In tmux use nterw file browser if needed
 nnoremap <leader>l  :NERDTreeTabsToggle<CR>
@@ -748,34 +707,7 @@ augroup END
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 
-" CtrlP.vim config
-augroup ctrlp_config
-  autocmd!
-  let g:ctrlp_cmd = 'CtrlP'
-  let g:ctrlp_user_command = {
-    \ 'types': {
-      \ 1: ['.git', 'cd %s && git ls-files'],
-      \ 2: ['.hg', 'hg --cwd %s locate -I .'],
-    \ },
-    \ 'fallback': 'find %s -type f'
-  \ }
-  let g:ctrlp_match_window = 'top,order:btt'
-  let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_use_caching = 1
-  let g:ctrlp_clear_cache_on_exit = 1
-  let g:ctrlp_lazy_update = 350 " Set delay to prevent extra search
-  let g:ctrlp_match_window_bottom = 0 " Show at top of window
-  let g:ctrlp_switch_buffer = 'Et' " Jump to tab AND buffer if already open
-" CtrlP -> directories to ignore when fuzzy finding
-  let g:ctrlp_custom_ignore = '\v[\/]((node_modules)|\.(git|svn|grunt|sass-cache))$'
-augroup END
-
-if exists("g:ctrl_user_command")
-  unlet g:ctrlp_user_command
-endif
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*/vendor/*,*/\.git/*
-
-" CtrlP -> files matched are ignored when expanding wildcards
 set wildignore+=*/.git/*,*/.hg/*,*/.svn/*.,*/.DS_Store,*~/.vim/view/*
 
 set wildignorecase
@@ -1175,14 +1107,6 @@ vmap <Leader>a, :Tabularize /,\zs<CR>
 
 let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
-if isdirectory(expand("~/.vim/bundle/rainbow_parentheses.vim/"))
-    au VimEnter * RainbowParenthesesToggle
-    au Syntax * RainbowParenthesesLoadRound
-    au Syntax * RainbowParenthesesLoadSquare
-    au Syntax * RainbowParenthesesLoadBraces
-endif
-
-
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
 
@@ -1217,6 +1141,12 @@ cnoremap <c-d> <Del>
 
 " au Filetype python nnoremap <leader>f :silent call PyFix()
 "
-" C or CPP header abbrebiation complete
+" C or CPP header abbreviation complete
 ab #i #include
 ab #d #define
+
+" vim spell checking feature is good for editing txt file markdown or latex
+if has("spell")
+    set spelllang=en_us
+    nnoremap <leader>s :set spell!<CR>
+endif
