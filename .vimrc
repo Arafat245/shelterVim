@@ -425,7 +425,7 @@ augroup END
 augroup sourceCodeRuby
   autocmd!
   autocmd FileType ruby nnoremap <leader>ra :! rubocop % <CR>
-  autocmd FileType ruby nnoremap <leader>a :call SaveRubocop()<CR>
+  autocmd FileType ruby nnoremap <leader>a :call RubocopFix()<CR>
   autocmd FileType ruby nnoremap <leader>r :! ruby % <CR>
   " Ruby autocomplete
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
@@ -448,7 +448,7 @@ augroup END
 set matchpairs+=<:>
 
 " " vim statusline when ~$vim --noplugin and airline is not active
-" " set statusline=   " clear the statusline for when vimrc is reloaded
+" set statusline=   " clear the statusline for when vimrc is reloaded
 " set statusline+=%-10.3n\                      " buffer number
 " set statusline+=%f\                          " file name
 " set statusline=[%t]                        " only current tail filename
@@ -459,7 +459,6 @@ set matchpairs+=<:>
 " set statusline+=%=                           " right align
 " set statusline+=%{synIDattr(synID(line('.'),col('.'),1),'name')}\  " highlight
 " set statusline+=%-14.(%l,%c%V%)\ %<%P        " offset
-
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
@@ -794,12 +793,11 @@ nnoremap <silent><expr> <Leader>hh (&hls && v:hlsearch ? ':set nohls' : ':set hl
 
 nnoremap <leader>tn :call ToggleNumber()<CR>
 
-set relativenumber
+set cursorline number
 
 function! ToggleNumber()
     if (&relativenumber == 1)
         set norelativenumber
-        set number
     else
         set relativenumber
     endif
@@ -992,11 +990,11 @@ endfunction
 nnoremap <silent> <leader>te :<C-u>call ToggleErrors()<CR>
 
 " writing function for saving after rubocop in vim
-function! SaveRubocop()
+function! RubocopFix()
   execute ":! rubocop % -a"
   execute ":w!"
 endfunction
-command! SaveRubocop :call SaveRubocop()
+command! RubocopFix :call RubocopFix()
 
 " vim commentary
 autocmd FileType c,cpp,cs,java      setlocal commentstring=//\ %s
@@ -1183,5 +1181,38 @@ if isdirectory(expand("~/.vim/bundle/rainbow_parentheses.vim/"))
     au Syntax * RainbowParenthesesLoadSquare
     au Syntax * RainbowParenthesesLoadBraces
 endif
+
+
 " automatically rebalance windows on vim resize
 autocmd VimResized * :wincmd =
+
+" use spelling in email and git commit messages
+autocmd FileType mail,gitcommit set spell
+set spellsuggest=5
+
+" make the command mode less annoying
+" Emacs(readline) binding is here
+cnoremap <c-a> <Home>
+cnoremap <c-e> <End>
+cnoremap <c-p> <Up>
+cnoremap <c-n> <Down>
+cnoremap <c-b> <Left>
+cnoremap <c-f> <Right>
+cnoremap <c-d> <Del>
+
+" " Automatic formating for language
+" here for python make sure you have autopep8 installed in your system
+" You can use this technique for other formatter function
+" or you can write it on your own way for example see RubocopFix
+
+" function! PyFix()
+"   w!
+"   set autoread
+"   silent exec "! autopep8 -i -a ".expand('%')
+"   redraw!
+"   set noautoread
+"   e!
+"   w
+" endf
+
+" au Filetype python nnoremap <leader>f :silent call PyFix()
