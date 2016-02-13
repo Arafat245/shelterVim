@@ -17,7 +17,7 @@ flags = [
     # a "-std=<something>".
     # For a C project, you would set this to something like 'c99' instead of
     # 'c++14'.
-    '-std=c++14',
+    # '-std=c++11',
     '-std=c++14',
     '-stdlib=libc++',
     # '-lc++abi',
