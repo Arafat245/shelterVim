@@ -51,7 +51,6 @@ Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-unimpaired'
 " worked for java and scala
 Plugin 'tpope/vim-classpath'
-
 " plugins
 Plugin 'bling/vim-airline'
 Plugin 'ekalinin/Dockerfile.vim'
@@ -930,6 +929,7 @@ command! RubocopFix :call RubocopFix()
 
 " vim commentary
 autocmd FileType c,cpp,cs,java      setlocal commentstring=//\ %s
+autocmd FileType sql  setlocal commentstring=--\ %s
 
 "using thoughtbot/vim-rspec and tpope/dispatch.
 let g:rspec_command = "Dispatch bin/rspec {spec}"
