@@ -548,14 +548,15 @@ set splitright
 " Allow stylesheets to autocomplete hyphenated words
 autocmd FileType css,scss,sass setlocal iskeyword+=-
 
-" change the terminal title
 set title
 
 " ; is better than :
 nnoremap ; :
 
-" use system clipboard by default
-set clipboard=unnamedplus
+" Use the system clipboard for yank / delete / paste operations
+if has('unnamedplus')
+   set clipboard=unnamed
+endif
 
 " ensure line numbers are viewable in translucent terminal windows
 highlight LineNr ctermfg=darkgray ctermbg=blue
@@ -1150,3 +1151,4 @@ if has("spell")
     set spelllang=en_us
     nnoremap <leader>s :set spell!<CR>
 endif
+
