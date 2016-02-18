@@ -364,6 +364,7 @@ augroup END
 " better for .c and .cpp build and run
 augroup sourceCodeC
   autocmd!
+  autocmd BufWritePost  *.c  retab! 4
   autocmd FileType c nnoremap <leader>b :! make %:r<CR>
   autocmd FileType c nnoremap <leader>bb :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors *.c -o %:r<CR>
   autocmd FileType c nnoremap <leader>bn :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors -o<space>
@@ -374,7 +375,9 @@ augroup END
 augroup sourceCodeCPP
   autocmd!
   autocmd FileType cc,cpp nnoremap <leader>b :! make %:r<CR>
-
+  " For adjusting MIX indentation on save
+  autocmd BufWritePost  *.cc  retab! 4
+  autocmd BufWritePost  *.cpp  retab! 4
   autocmd FileType cc,cpp nnoremap <leader>bb :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 *.cpp -o %:r<CR>
 
   autocmd FileType cc,cpp nnoremap <leader>bn :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 -o<space>
@@ -1151,4 +1154,5 @@ if has("spell")
     set spelllang=en_us
     nnoremap <leader>s :set spell!<CR>
 endif
+
 
