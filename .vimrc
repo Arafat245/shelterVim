@@ -365,8 +365,8 @@ augroup END
 augroup sourceCodeC
   autocmd!
   autocmd BufWritePost  *.c  retab! 4
-  autocmd FileType c nnoremap <leader>b :! make %:r<CR>
-  autocmd FileType c nnoremap <leader>bb :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors *.c -o %:r<CR>
+  autocmd FileType c nnoremap <leader>bb :! make %:r<CR>
+  autocmd FileType c nnoremap <leader>bm :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors *.c -o %:r<CR>
   autocmd FileType c nnoremap <leader>bn :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors -o<space>
   autocmd FileType c nnoremap <leader>r :! ./
   autocmd FileType c nnoremap <leader>rr :! ./%:r<CR>
@@ -1154,5 +1154,7 @@ if has("spell")
     set spelllang=en_us
     nnoremap <leader>s :set spell!<CR>
 endif
+
+let $PAGER=''
 
 
