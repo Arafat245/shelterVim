@@ -374,7 +374,7 @@ augroup END
 
 augroup sourceCodeCPP
   autocmd!
-  autocmd FileType cc,cpp nnoremap <leader>b :! make %:r<CR>
+  autocmd FileType cc,cpp nnoremap <leader>bb :! make %:r<CR>
   autocmd BufWritePost  *.cc  retab! 4
   autocmd BufWritePost  *.cpp  retab! 4
   autocmd FileType cc,cpp nnoremap <leader>bb :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 *.cpp -o %:r<CR>
