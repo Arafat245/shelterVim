@@ -31,6 +31,7 @@ flags = [
     '-isystem', '/System/Library/Frameworks/Python.framework/Headers',
     '-isystem', '/usr/local/include',
     '-isystem', '/usr/include/',
+    '-isystem', '/usr/src/gtest/'
     '-isystem', '/usr/include/c++/v1/',
     '-isystem', '/usr/local/include/eigen3',
     '-I', 'include',
