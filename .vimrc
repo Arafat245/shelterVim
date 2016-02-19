@@ -558,7 +558,7 @@ nnoremap ; :
 
 " Use the system clipboard for yank / delete / paste operations
 if has('unnamedplus')
-   set clipboard=unnamed
+   set clipboard=unnamed,unnamedplus
 endif
 
 " ensure line numbers are viewable in translucent terminal windows
