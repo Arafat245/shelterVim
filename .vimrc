@@ -1,4 +1,4 @@
-" My vimrc setting
+
 " THE VIMRC $MyVIMRC
 " vim configuration file
 " Edited by Emrul Hasan Zawad <mechezawad@outlook.com>
@@ -1155,6 +1155,38 @@ if has("spell")
     nnoremap <leader>s :set spell!<CR>
 endif
 
-let $PAGER=''
+" Helpful for printing as a series
+function! Counter(...)
+    if exists("a:1")
+        let w:counter = a:1
+    else
+        let w:counter = 0
+    end
 
+    if exists("a:2")
+        let w:incre = a:2
+    else
+        let w:incre = 1
+    end
 
+    " a:0 represent number of commandline agrv like C Language (argc)
+    " a:1 represent argument vector like C Language (argv)
+    if exists("a:3")
+        let w:delim = a:3
+    else
+        let w:delim = ","
+    end
+
+    func! ListItem()
+      let w:counter += w:incre
+      return w:counter - w:incre . w:delim ." "
+    endfunc
+
+    func! ListReset()
+      let w:counter = 0
+      return ''
+    endfunc
+
+    inoremap <expr> <C-L> ListItem()
+    inoremap <expr> <C-R> ListReset()
+endfunction
