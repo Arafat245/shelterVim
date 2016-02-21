@@ -1259,5 +1259,7 @@ hi MatchParen ctermbg=blue guibg=lightblue
 
 " Better JUMP upwards and downwards
 inoremap <C-k> <C-g>k
+" remember, I have remapped <C-j> VIM's default Behavior
+" NO No ..There is a default alternative of <C-j> is <C-m>
 inoremap <C-j> <C-g>j
 
