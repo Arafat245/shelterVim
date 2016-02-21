@@ -209,6 +209,7 @@ nmap <leader>ew :e %%
 nmap <leader>es :sp %%
 nmap <leader>ev :vsp %%
 nmap <leader>et :tabe %%
+" open in read only mode
 nmap <leader>v  :view %%
 " you can also map :new and :vnew if you like
 
@@ -1256,7 +1257,7 @@ ab fro for
 " Highlight Matched Parenthesis
 hi MatchParen ctermbg=blue guibg=lightblue
 
-" Better JUMP upword and downword
+" Better JUMP upwards and downwards
 inoremap <C-k> <C-g>k
 inoremap <C-j> <C-g>j
 

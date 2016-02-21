@@ -59,7 +59,7 @@ You'll also probably want ctags installed. On Ubuntu, you can do:
 
 ## Color Schemes
 
-The default color scheme is [Smyck](https://github.com/hukl/Smyck-Color-Scheme/). For best results, install both the vim color scheme *and* the terminal color scheme. To install the terminal theme, simply double-click the `itermcolors` file for iTerm or the `terminal` file for Terminal, then pick the color scheme from the terminal preferences menu.
+The default color scheme is [Smyck](https://github.com/hukl/Smyck-Color-Scheme/). For best results, install both the vim color scheme and the terminal color scheme. To install the terminal theme, simply double-click the `itermcolors` file for iTerm or the `terminal` file for Terminal, then pick the color scheme from the terminal preferences menu. FOR XUBUNTU you can put terminal colorscheme in / root fooder
 
 Other available (awesome) colorschemes:
 
