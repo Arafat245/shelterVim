@@ -1263,7 +1263,8 @@ inoremap <C-k> <C-g>k
 " NO No ..There is a default alternative of <C-j> is <C-m>
 inoremap <C-j> <C-g>j
 
-" disable individual keys by mapping them to the special <Nop>
-" only in INSERT mode
-inoremap <BS> <Nop>
-inoremap <Del> <Nop>
+" " disable individual keys by mapping them to the special <Nop>
+" " only in INSERT mode
+" " for purity
+" inoremap <BS> <Nop>
+" inoremap <Del> <Nop>
