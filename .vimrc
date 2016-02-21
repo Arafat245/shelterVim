@@ -556,7 +556,7 @@ autocmd FileType css,scss,sass setlocal iskeyword+=-
 set title
 
 " ; is better than :
-nnoremap ; :
+" nnoremap ; :
 
 " Use the system clipboard for yank / delete / paste operations
 if has('unnamedplus')
