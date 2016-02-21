@@ -1,4 +1,3 @@
-
 " THE VIMRC $MyVIMRC
 " vim configuration file
 " Edited by Emrul Hasan Zawad <mechezawad@outlook.com>
@@ -196,20 +195,22 @@ map <C-l> <C-W>l
 
 " ,g: ctags go to definition in new tab
 " ,G: ctags go to definition in new buffer
-" ,tp: toggle paste mode
 " ,,: line feed in normal
 " ,q: close tab
 " ,hz: my doc file
 " ,z : set automatic foldmethod
 " ,zz: set auto open and close folding
 " ,zzz: out from fold
+" ,tp: toggle paste mode
 " ,ts : SyntasticToggleMode
 
-" Edit another file in the same directory as the current file
-" uses expression to extract path from current file's path
-nnoremap <Leader>e :e <C-R>=escape(expand("%:p:h"),' ') . '/'<CR>
-nnoremap <Leader>s :split <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
-nnoremap <Leader>v :vnew <C-R>=escape(expand("%:p:h"), ' ') . '/'<CR>
+cnoremap %% <C-R>=fnameescape(expand('%:p:h')).'/'<cr>
+nmap <leader>ew :e %%
+nmap <leader>es :sp %%
+nmap <leader>ev :vsp %%
+nmap <leader>et :tabe %%
+nmap <leader>v  :view %%
+" you can also map :new and :vnew if you like
 
 nnoremap <silent> <leader>, o<Esc>
 
@@ -425,7 +426,7 @@ augroup sourceCodeRuby
   autocmd FileType ruby nnoremap <leader>ra :! rubocop % <CR>
   autocmd FileType ruby nnoremap <leader>a :call RubocopFix()<CR>
   autocmd FileType ruby nnoremap <leader>r :! ruby % <CR>
-  " Ruby autocomplete
+  " Ruby autocomplete OMNICOMPLETE
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
@@ -1120,13 +1121,25 @@ set spellsuggest=5
 
 " make the command mode less annoying
 " Emacs(readline) binding is here
-cnoremap <c-a> <Home>
-cnoremap <c-e> <End>
-cnoremap <c-p> <Up>
-cnoremap <c-n> <Down>
-cnoremap <c-b> <Left>
-cnoremap <c-f> <Right>
-cnoremap <c-d> <Del>
+" start of line
+cnoremap <C-A>     <Home>
+" back one character
+cnoremap <C-B>     <Left>
+" delete character under cursor
+cnoremap <C-D>     <Del>
+" end of line
+cnoremap <C-E>     <End>
+" forward one character
+cnoremap <C-F>     <Right>
+" recall newer command-line
+cnoremap <C-N>     <Down>
+" recall previous (older) command-line
+cnoremap <C-P>     <Up>
+" back one word
+cnoremap <Esc><C-B>    <S-Left>
+" forward one word
+cnoremap <Esc><C-F>    <S-Right>
+
 
 " " Automatic formating for language
 " here for python make sure you have autopep8 installed in your system
@@ -1190,3 +1203,60 @@ function! Counter(...)
     inoremap <expr> <C-L> ListItem()
     inoremap <expr> <C-R> ListReset()
 endfunction
+
+" Better backword deletion in insert mode
+inoremap <C-u> <C-g>u<C-u>
+inoremap <C-w> <C-g>u<C-w>
+
+" Better focus to line number
+autocmd InsertLeave * set cursorline
+autocmd InsertEnter * set nocursorline
+
+" YCM configuration
+" let g:ycm_confirm_extra_conf    = 0
+" Sometimes useful
+let g:ycm_seed_identifiers_with_syntax = 1
+
+" emacs (readline style)
+"
+" That don't Wait for long command
+set ttimeout
+if &ttimeoutlen == -1
+  set ttimeoutlen=50
+endif
+
+" Oh Wait I have remaped to
+" Last inserted text in vim<C-A> REMAPPED
+" IN insert mode <C-x> insert you in sub command mode
+inoremap   <C-X><C-A> <C-A>
+
+" emacs binding WORKS like charm in insert mode
+" INspired from EMACS
+" start of line
+inoremap        <C-A> <C-O>^
+" back one word
+inoremap <expr> <C-B> getline('.')=~'^\s*$'&&col('.')>strlen(getline('.'))?"0\<Lt>C-D>\<Lt>Esc>kJs":"\<Lt>Left>"
+" delete character under cursor
+inoremap <expr> <C-D> col('.')>strlen(getline('.'))?"\<Lt>C-D>":"\<Lt>Del>"
+" end of line
+inoremap <expr> <C-E> col('.')>strlen(getline('.'))<bar><bar>pumvisible()?"\<Lt>C-E>":"\<Lt>End>"
+" forward one character
+inoremap <expr> <C-F> col('.')>strlen(getline('.'))?"\<Lt>C-F>":"\<Lt>Right>"
+
+" JUMP BACK FROM COMMAD MODE IN VIM
+" ALternative to ESC in command line mode
+if empty(mapcheck('<C-G>', 'c'))
+  cmap <script> <C-G> <C-C>
+endif
+
+" common type-mistakes
+ab teh the
+ab fro for
+
+" Highlight Matched Parenthesis
+hi MatchParen ctermbg=blue guibg=lightblue
+
+" Better JUMP upword and downword
+inoremap <C-k> <C-g>k
+inoremap <C-j> <C-g>j
+

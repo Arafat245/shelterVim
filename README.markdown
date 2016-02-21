@@ -1,4 +1,4 @@
-Vim configuration
+## Vim configuration
 # ---
 
 VIM 7.4 or greater version is needed
@@ -21,6 +21,10 @@ Not compatible with Windows :( :( :(
 
 Arduino support
 
+### NOTE
+
+    Make sure you should know some VIML(Vim Script)
+
 !!! Caution!
 ## Installation may vary because World is Dynamic
   Make sure you have curl, git, tmux and bash installed
@@ -42,7 +46,7 @@ Arduino support
 
 ## Now you can install the vimrc
 ### for build pre-sanity check
-    
+
     export CXX=g++ CC=gcc ; unset CFLAGS CXXFLAGS LDLIBS
 
 jus using a single command
@@ -72,7 +76,7 @@ Other available (awesome) colorschemes:
 
 ## Extra
 For some reason you may need my dotfiles
-SEE my ehzShelter/dotMethod repo
+SEE my http://www.github.com/ehzShelter/dotMethod repo
 
 ## YCM in case of NEED
 for YCM go to ~/.vim/bundle/YouCompleteMe/
