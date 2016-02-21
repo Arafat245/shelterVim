@@ -560,7 +560,9 @@ set title
 
 " Use the system clipboard for yank / delete / paste operations
 if has('unnamedplus')
-   set clipboard=unnamed,unnamedplus
+    " " System CLipboard and vim registers
+   " set clipboard=unnamedplus
+   set clipboard=unnamed
 endif
 
 " ensure line numbers are viewable in translucent terminal windows
@@ -1268,3 +1270,9 @@ inoremap <C-j> <C-g>j
 " " for purity
 " inoremap <BS> <Nop>
 " inoremap <Del> <Nop>
+
+nnoremap  y "+y
+nnoremap  yy "+yy
+nnoremap  Y "+Y
+xnoremap  y "+y
+xnoremap  Y "+Y
