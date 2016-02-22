@@ -29,6 +29,9 @@ Arduino support
 ## Installation may vary because World is Dynamic
   Make sure you have curl, git, tmux and bash installed
 
+  Install Latest Stable Vim as much as possible .
+
+  No neovim support right now
 
 ## Installation:
 
@@ -107,6 +110,14 @@ XFce terminal, you may have to make the size of "Non-ASCII Font" smaller than th
 
 ## Learn Vim in terminal
 >Type vimtutor in Terminal
+
+## Ubuntu Latest vim installation PPA
+
+        sudo add-apt-repository -y ppa:pi-rho/dev
+
+        sudo apt-get update ; sudo apt-get upgrade
+
+        sudo apt-get install vim vim-nox vim-gtk tmux
 
 vimtutor
 
