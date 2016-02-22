@@ -52,6 +52,7 @@ vim +BundleInstall +qall < /dev/tty # necessary to avoid vim: Input not from ter
 echo
 echo Installed vim plugins "(could take a while)"
 echo Be patient there is so much dependices May be or NOT
+echo Please wait
 
 echo -n "Are you sure to install YouCompleteMe with Clang-complete support(y/n)"
 read answer
