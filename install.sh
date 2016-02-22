@@ -54,7 +54,7 @@ echo Installed vim plugins "(could take a while)"
 echo Be patient there is so much dependices May be or NOT
 echo Please wait
 
-echo -n "Are you sure to install YouCompleteMe with Clang-complete support(y/n) Otherwise dafault will install"
+echo -n "Are you sure to install YouCompleteMe with Clang-complete support(y/n) Otherwise default will install"
 read answer
 if echo "$answer" | grep -iq "^y" ; then
 ~/.vim/bundle/YouCompleteMe/install.py --clang-completer
@@ -62,5 +62,5 @@ if echo "$answer" | grep -iq "^y" ; then
 ~/.vim/bundle/YouCompleteMe/install.py
 fi
 
-echo -e "\[\e[1;32m\]Everything succesfully installed.\[\e[0m\]"
+echo -e "\[\e[1;32m\]Everything successfully installed.\[\e[0m\]"
 echo " THANK YOU :) :) "
