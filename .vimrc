@@ -1271,11 +1271,11 @@ inoremap <C-j> <C-g>j
 " inoremap <BS> <Nop>
 " inoremap <Del> <Nop>
 
-nnoremap  y "+y
-nnoremap  yy "+yy
 nnoremap  Y "+Y
-xnoremap  y "+y
+nnoremap  y "+yy
+nnoremap  yy "+yy
 xnoremap  Y "+Y
+xnoremap  y "+y
 
 " Spell-check Markdown files
 autocmd FileType markdown setlocal spell
@@ -1284,3 +1284,6 @@ autocmd FileType gitcommit setlocal spell
 "
 " you will forget some mapping so read key map directly from plgin folder or
 " :h
+
+" Vim global plugin for restricting colon commands to visual blocks
+" vmap B is the mapping for blockwise.vim BY AUTHOR: DAMIAN CONOWAY
