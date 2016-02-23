@@ -44,7 +44,7 @@ Arduino support
     " for clipboard support
     sudo apt-get install vim-gtk
     " dependencies
-    sudo apt-get install python python-dev cmake autoconf
+    sudo apt-get install python-dev cmake autoconf
 
 
 ## Now you can install the vimrc
@@ -74,7 +74,7 @@ Other available (awesome) colorschemes:
 > see vimrc file
 > Vundle Plugin manager is used
 > you can also use pathogen too ! :)
-
+> Please Install Latest version of Vim using Package manager
 
 
 ## Extra

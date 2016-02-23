@@ -954,7 +954,7 @@ function! MergeTwoTabs()
   else
     close!
     tabprev
-  endif
+
   split
   execute "buffer " . bufferName
 endfunction
@@ -1276,3 +1276,11 @@ nnoremap  yy "+yy
 nnoremap  Y "+Y
 xnoremap  y "+y
 xnoremap  Y "+Y
+
+" Spell-check Markdown files
+autocmd FileType markdown setlocal spell
+" Spell-check Git messages
+autocmd FileType gitcommit setlocal spell
+"
+" you will forget some mapping so read key map directly from plgin folder or
+" :h
