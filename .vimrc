@@ -311,12 +311,12 @@ set guioptions=irml
 let g:syntastic_enable_balloons = 1
 " Syntastic Plugin C11 support Clang Compiler
 " change value to gcc if you love GCC compiler
-let g:syntastic_c_compiler = 'clang'
+let g:syntastic_c_compiler = '/usr/bin/clang'
 let g:syntastic_c_compiler_options = ' -std=c11 -Wall -Werror -pedantic-errors '
 
 " Syntastic Plugin C++14 support for Clang Compiler
 " Make sure clang have system path
-let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler = '/usr/bin/clang++'
 " let g:syntastic_cpp_compiler = 'g++'
 " flags more specific to clang
 let g:syntastic_cpp_compiler_options = ' -ggdb3 -O0 -std=c++14 -stdlib=libc++ -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy '
