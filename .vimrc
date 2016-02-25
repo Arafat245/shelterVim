@@ -80,6 +80,7 @@ Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'junegunn/rainbow_parentheses.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -128,6 +129,7 @@ set magic
 
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
+set wildignore+=view/**
 
 " disable backups
 set nobackup
@@ -1011,6 +1013,7 @@ au BufRead,BufNewFile *.asm set filetype=nasm
 " like tree Data Structure
 set path=$PWD/**
 set path+=$HOME/**
+set path-=$HOME/.vim/**
 set path+=/usr/include/c++/v1**
 " set path+=/usr/local/include
 
