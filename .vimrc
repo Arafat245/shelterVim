@@ -25,6 +25,8 @@ Plugin 'gmarik/Vundle.vim'
 " color schemes
 Plugin 'w0ng/vim-hybrid'
 Plugin 'neitanod/vim-clevertab'
+Plugin 'tpope/vim-ragtag'
+Plugin 'docunext/closetag.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'hukl/Smyck-Color-Scheme'
 Plugin 'nanotech/jellybeans.vim'
