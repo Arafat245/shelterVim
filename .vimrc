@@ -81,6 +81,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'junegunn/rainbow_parentheses.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -129,7 +130,7 @@ set magic
 
 " Ignore stuff that can't be opened
 set wildignore+=tmp/**
-set wildignore+=view/**
+set wildignore+=~/.vim/view/**
 
 " disable backups
 set nobackup
@@ -1224,10 +1225,14 @@ autocmd InsertEnter * set nocursorline
 " let g:ycm_confirm_extra_conf    = 0
 " Sometimes useful
 let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_always_populate_location_list = 1
 
-" emacs (readline style)
+" YouCompleteMe will populate vims location list with new diagnostic data.
+" You can jump through the entries in that list with :lnext and :lprevious.
 "
+" emacs (readline style)
 " That don't Wait for long command
+" thanks to @tpope
 set ttimeout
 if &ttimeoutlen == -1
   set ttimeoutlen=50
@@ -1282,13 +1287,36 @@ nnoremap  yy "+yy
 xnoremap  Y "+Y
 xnoremap  y "+y
 
-" Spell-check Markdown files
-autocmd FileType markdown setlocal spell
-" Spell-check Git messages
-autocmd FileType gitcommit setlocal spell
-"
 " you will forget some mapping so read key map directly from plgin folder or
 " :h
 
 " Vim global plugin for restricting colon commands to visual blocks
 " vmap B is the mapping for blockwise.vim BY AUTHOR: DAMIAN CONOWAY
+"
+" CtrlP is not intended for hidden file ...You find rather
+" CtrlP.vim config
+let g:ctrlp_match_window = 'bottom,order:btt'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_clear_cache_on_exit = 1
+let g:ctrlp_lazy_update = 350 " Set delay to prevent extra search
+" let g:ctrlp_match_window_bottom = 0 " Show at top of window
+let g:ctrlp_switch_buffer = 'Et' " Jump to tab AND buffer if already open
+" CtrlP -> directories to ignore when fuzzy finding
+" CtrlP -> directories to ignore when fu
+
+" Quicking autocomplete above and below line
+" Thanks to @thoughtbot
+inoremap <expr> <C-y> matchstr(getline(line('.') - 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
+inoremap <expr> <C-e> matchstr(getline(line('.') + 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
+
+" split WINDOW
+set noequalalways
+" Autocomplete with dictionary words when spell check is on
+set complete+=kspell
+set dictionary=/usr/share/dict/words
+
+" NOTE PLUGIN usage
+" see official documentation page for better use
+" use * for search word under cursor
+" use g* for search word under cursor
+"
