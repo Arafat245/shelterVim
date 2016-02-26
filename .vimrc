@@ -1016,7 +1016,8 @@ au BufRead,BufNewFile *.asm set filetype=nasm
 " like tree Data Structure
 set path=$PWD/**
 set path+=$HOME/**
-set path-=$HOME/.vim/**
+set path-=~/.vim/view/
+set path-=~/.vim/bundle/
 set path+=/usr/include/c++/v1**
 " set path+=/usr/local/include
 
@@ -1311,10 +1312,12 @@ let g:ctrlp_switch_buffer = 'Et' " Jump to tab AND buffer if already open
 inoremap <expr> <C-y> matchstr(getline(line('.') - 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
 inoremap <expr> <C-e> matchstr(getline(line('.') + 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
 
-" split WINDOW
+" split WINDOW not always in EQUAL SIZE
 set noequalalways
 " Autocomplete with dictionary words when spell check is on
-set dictionary=/usr/share/dict/words
+set dictionary+=/usr/share/dict/words
+au FileType * execute 'setlocal dict+=~/.vim/spell/'.&filetype.'.txt'
+" set dictionary+=~/.vim/spell
 
 " NOTE for PLUGIN usage
 " see official documentation page for better use
