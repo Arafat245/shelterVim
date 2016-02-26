@@ -1316,8 +1316,17 @@ set noequalalways
 set complete+=kspell
 set dictionary=/usr/share/dict/words
 
-" NOTE PLUGIN usage
+" NOTE for PLUGIN usage
 " see official documentation page for better use
 " use * for search word under cursor
 " use g* for search word under cursor
-"
+" use gv      - reselect block
+" Rainbow parenthesis settings
+" Use <C-R> for using register in Command mode or Insert mode
+
+augroup ParenthesisColored
+    autocmd!
+    autocmd BufNewFile,BufRead,bufwritepost  * RainbowParentheses<CR>
+    nnoremap <leader>tr :RainbowParentheses!!<CR>
+augroup END
+
