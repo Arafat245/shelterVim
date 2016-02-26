@@ -1314,7 +1314,6 @@ inoremap <expr> <C-e> matchstr(getline(line('.') + 1), '\%' . virtcol('.') . 'v\
 " split WINDOW
 set noequalalways
 " Autocomplete with dictionary words when spell check is on
-set complete+=kspell
 set dictionary=/usr/share/dict/words
 
 " NOTE for PLUGIN usage
