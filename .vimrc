@@ -146,7 +146,8 @@ endif
 " font options
 set background=dark
 set t_Co=256
-colorscheme hybrid
+" colorscheme hybrid
+colorscheme smyck
 
 " keep at least 5 lines below the cursor
 set scrolloff=5
