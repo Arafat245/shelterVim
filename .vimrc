@@ -389,6 +389,7 @@ augroup sourceCodeCPP
   autocmd FileType cc,cpp nnoremap <leader>nb :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 -o<space>
 
   autocmd FileType cc,cpp nnoremap <silent> <leader>m :!clang-modernize -for-compilers=clang-3.6.2 -summary %<CR>
+  autocmd FileType cc,cpp nnoremap <leader>c :!clang-check -analyze<space>
   autocmd FileType cc,cpp nnoremap <leader>r :! ./
   autocmd FileType cc,cpp nnoremap <leader>rr :! ./%:r<CR>
 augroup END
