@@ -23,15 +23,15 @@ Plugin 'gmarik/Vundle.vim'
 " Vim Latex support
 " Plugin 'lervag/vimtex'
 " color schemes
-Plugin 'w0ng/vim-hybrid'
-Plugin 'neitanod/vim-clevertab'
-Plugin 'tpope/vim-ragtag'
-Plugin 'docunext/closetag.vim'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'docunext/closetag.vim'
 Plugin 'hukl/Smyck-Color-Scheme'
 Plugin 'nanotech/jellybeans.vim'
+Plugin 'neitanod/vim-clevertab'
 Plugin 'regedarek/ZoomWin'
+Plugin 'tpope/vim-ragtag'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'w0ng/vim-hybrid'
 " Plugins for javascript library and modern syntax
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
@@ -47,9 +47,9 @@ Plugin 'ngmy/vim-rubocop'
 Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-endwise'
-Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-ruby/vim-ruby'
 " worked for java and scala
 Plugin 'tpope/vim-classpath'
 " plugins
@@ -376,6 +376,8 @@ augroup sourceCodeC
   autocmd FileType c nnoremap <leader>b :! make %:r<CR>
   autocmd FileType c nnoremap <leader>mb :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors *.c -o %:r<CR>
   autocmd FileType c nnoremap <leader>nb :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors -o<space>
+  " remember clang refactoring tools also supports for C11
+  " you can use if you like
   autocmd FileType c nnoremap <leader>r :! ./
   autocmd FileType c nnoremap <leader>rr :! ./%:r<CR>
 augroup END
@@ -389,8 +391,8 @@ augroup sourceCodeCPP
 
   autocmd FileType cc,cpp nnoremap <leader>nb :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 -o<space>
 
-  autocmd FileType cc,cpp nnoremap <silent> <leader>m :!clang-modernize -for-compilers=clang-3.6.2 -summary %<CR>
-  autocmd FileType cc,cpp nnoremap <leader>c :!clang-check -analyze<space>
+  autocmd FileType cc,cpp nnoremap <silent> <leader>cm :!clang-modernize -for-compilers=clang-3.6.2 -summary %<CR>
+  autocmd FileType cc,cpp nnoremap <leader>cc :!clang-check -analyze % --<CR>
   autocmd FileType cc,cpp nnoremap <leader>r :! ./
   autocmd FileType cc,cpp nnoremap <leader>rr :! ./%:r<CR>
 augroup END
@@ -533,7 +535,7 @@ command! RenameFile :call RenameFile()
 nnoremap <Leader>nn :call RenameFile()<cr>
 
 " Disable K looking stuff up
-map K <Nop>
+nnoremap K <Nop>
 
 "  >>>highlight cursorcolumn and cursorline and statusline and tabline
 
@@ -1057,8 +1059,10 @@ augroup Clang-format
   " Clear old autocmds in group
   autocmd!
     " you have config your own style .clang-format
-    autocmd FileType c,cpp nnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
-    autocmd FileType c,cpp vnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    " Clang-formating the current buffer
+    autocmd FileType c,cpp,cc nnoremap <leader>cf :!clang-format -i -style=WebKit %<CR>
+    autocmd FileType c,cpp,cc nnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    autocmd FileType c,cpp,cc vnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
 augroup END
 
 "VIm autosave when loose focus
@@ -1311,7 +1315,6 @@ let g:ctrlp_switch_buffer = 'Et' " Jump to tab AND buffer if already open
 " Thanks to @thoughtbot
 inoremap <expr> <C-y> matchstr(getline(line('.') - 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
 inoremap <expr> <C-e> matchstr(getline(line('.') + 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
-
 " split WINDOW not always in EQUAL SIZE
 set noequalalways
 " Autocomplete with dictionary words when spell check is on
@@ -1332,4 +1335,3 @@ augroup ParenthesisColored
     autocmd BufNewFile,BufRead,bufwritepost  * RainbowParentheses<CR>
     nnoremap <leader>tr :RainbowParentheses!!<CR>
 augroup END
-
