@@ -193,10 +193,12 @@ nnoremap <leader>tl :TagbarToggle<CR>
 
 " better moving between windows
 " Ctrl+{h,j,k,l}: move among windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+nnoremap <C-k> <C-W>k
+nnoremap <C-j> <C-W>j
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
+" Toggle  between most recent window
+nnoremap <C-x> <C-w>x
 
 
 " ,g: ctags go to definition in new tab
@@ -586,7 +588,6 @@ endif
 " supertab config
 " let g:SuperTabDefaultCompletionType = '<C-X><C-O>'
 
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
 " Vim airline setting
 let g:airline#extensions#tabline#enabled = 1
 
@@ -770,7 +771,9 @@ set nomore
 
 " Use space to jump down a page (like browsers do)...
 nnoremap  <Space> <PageDown>
-vnoremap  <Space> <PageDown>
+xnoremap  <Space> <PageDown>
+nnoremap <NUL> <PageUp>
+xnoremap <NUL> <PageUp>
 
 " Inverse highlighting for cursor...
 highlight CursorInverse   term=inverse ctermfg=black ctermbg=white
@@ -1115,8 +1118,8 @@ augroup END
 
 " If you prefer the Omni-Completion tip window to close when a selection is
 " made, these lines close it on movement in insert mode or when leaving insert mode
-autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 " Tabularize
 nmap <Leader>a= :Tabularize /=\zs<CR>
@@ -1335,3 +1338,6 @@ augroup ParenthesisColored
     autocmd bufwritepost  * RainbowParentheses<CR>
     nnoremap <leader>tr :RainbowParentheses!!<CR>
 augroup END
+
+" fugitive Quickfix WINDOW
+autocmd QuickFixCmdPost *grep* cwindow
