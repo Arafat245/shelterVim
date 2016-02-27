@@ -1274,7 +1274,6 @@ endif
 
 " common type-mistakes
 ab teh the
-ab fro for
 
 " Highlight Matched Parenthesis
 hi MatchParen ctermbg=blue guibg=lightblue
@@ -1287,7 +1286,7 @@ inoremap <C-j> <C-g>j
 
 " " disable individual keys by mapping them to the special <Nop>
 " " only in INSERT mode
-" " for purity
+" " for purity BUT I AM not used to
 " inoremap <BS> <Nop>
 " inoremap <Del> <Nop>
 
@@ -1341,3 +1340,17 @@ augroup END
 
 " fugitive Quickfix WINDOW
 autocmd QuickFixCmdPost *grep* cwindow
+
+" simplify resizing splits in vim Window
+" Activate Meta in hecky way
+" You can Deactive your ALT key mapping in Terminal or iTerm
+" for some case...But Still ..It will work
+" reference http://vi.stackexchange.com/questions/2350/how-to-map-alt-key
+execute "set <M-j>=\ej"
+nnoremap <M-j> <C-w>-
+execute "set <M-k>=\ek"
+nnoremap <M-k> <C-w>+
+execute "set <M-h>=\eh"
+nnoremap <M-h> <C-w><
+execute "set <M-l>=\el"
+nnoremap <M-l> <C-w>>
