@@ -366,7 +366,7 @@ let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 " Only works in vim --noplugin mode
 augroup htmlIndent
   autocmd!
-  autocmd BufRead,BufWritePost *.html normal gg=G
+  autocmd BufWritePost *.html normal gg=G
 augroup END
 
 " better for .c and .cpp build and run
@@ -1332,6 +1332,6 @@ au FileType * execute 'setlocal dict+=~/.vim/spell/'.&filetype.'.txt'
 
 augroup ParenthesisColored
     autocmd!
-    autocmd BufNewFile,BufRead,bufwritepost  * RainbowParentheses<CR>
+    autocmd bufwritepost  * RainbowParentheses<CR>
     nnoremap <leader>tr :RainbowParentheses!!<CR>
 augroup END
