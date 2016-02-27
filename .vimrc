@@ -24,6 +24,7 @@ Plugin 'gmarik/Vundle.vim'
 " Plugin 'lervag/vimtex'
 " color schemes
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Valloric/ListToggle'
 Plugin 'docunext/closetag.vim'
 Plugin 'hukl/Smyck-Color-Scheme'
 Plugin 'nanotech/jellybeans.vim'
@@ -188,8 +189,8 @@ set nohidden
 set tags=./tags,tags;
 set tags+=~/.vim/myTags/systags
 
-" ,tl browse tags using ctags
-nnoremap <leader>tl :TagbarToggle<CR>
+" ,tt browse tags using ctags
+nnoremap <leader>tt :TagbarToggle<CR>
 
 " better moving between windows
 " Ctrl+{h,j,k,l}: move among windows
@@ -772,6 +773,7 @@ set nomore
 " Use space to jump down a page (like browsers do)...
 nnoremap  <Space> <PageDown>
 xnoremap  <Space> <PageDown>
+" use controlSpace to up a page
 nnoremap <NUL> <PageUp>
 xnoremap <NUL> <PageUp>
 
@@ -1062,10 +1064,12 @@ augroup Clang-format
   " Clear old autocmds in group
   autocmd!
     " you have config your own style .clang-format
+    " Clang Format also work for Objective C JAVA
     " Clang-formating the current buffer
-    autocmd FileType c,cpp,cc nnoremap <leader>cf :!clang-format -i -style=WebKit %<CR>
-    autocmd FileType c,cpp,cc nnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
-    autocmd FileType c,cpp,cc vnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    autocmd FileType c,cpp,cc,javascript nnoremap <leader>cf :!clang-format -i -style=WebKit %<CR>
+    autocmd FileType c,cpp,cc,javascript nnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    autocmd Filetype c,cpp,cc,javascript imap <C-L> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    autocmd FileType c,cpp,cc,javascript vnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
 augroup END
 
 "VIm autosave when loose focus
@@ -1342,7 +1346,7 @@ augroup END
 autocmd QuickFixCmdPost *grep* cwindow
 
 " simplify resizing splits in vim Window
-" Activate Meta in hecky way
+" Activate Meta in hacky way
 " You can Deactive your ALT key mapping in Terminal or iTerm
 " for some case...But Still ..It will work
 " reference http://vi.stackexchange.com/questions/2350/how-to-map-alt-key
@@ -1354,3 +1358,12 @@ execute "set <M-h>=\eh"
 nnoremap <M-h> <C-w><
 execute "set <M-l>=\el"
 nnoremap <M-l> <C-w>>
+
+" abbreviation in Commad-line mode
+cabb tabc tabclose
+
+" Valloric/ListToggle
+let g:lt_location_list_toggle_map = '<leader>tl'
+" THis is only work on gvim or macvim
+let g:lt_quickfix_list_toggle_map = '<leader>tq'
+
