@@ -304,16 +304,16 @@ call matchadd('ColorColumn', '\%81v', 100)
 " setting personalized rulerformat
 set rulerformat=%15(%c%V\ %p%%%)
 
-
 " Dragging and duplicating visual-line and visual-block mode
 " you can change your binding as you wish
+" source : Damian conway OSCON 2013
 
-vmap <expr> <C-h>   DVB_Drag('left')
+vmap <expr> <C-h>  DVB_Drag('left')
 vmap <expr> <C-l>  DVB_Drag('right')
-vmap <expr> <C-j>   DVB_Drag('down')
-vmap <expr> <C-k>     DVB_Drag('up')
-
-vmap <expr> <C-D>      DVB_Duplicate()
+vmap <expr> <C-j>  DVB_Drag('down')
+vmap <expr> <C-k>  DVB_Drag('up')
+" For Creating Duplicate
+vmap <expr> <C-D>  DVB_Duplicate()
 
 " gui configuration of gvim Graphical VIM
 function! ToggleGUICruft()
