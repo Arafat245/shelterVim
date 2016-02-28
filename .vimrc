@@ -98,7 +98,7 @@ set nu
 
 " omg folding is the worst
 " but sometimes useful for hiding details
-set nofoldenable
+" set nofoldenable
 
 " omg automatic comment insertion is the worst
 set formatoptions-=cro
@@ -231,10 +231,21 @@ nnoremap <leader>ts :SyntasticToggleMode<CR>
 nnoremap <leader>tp  :set invpaste<CR>
 nnoremap <leader>q  :tabclose<CR>
 nnoremap <Leader>hz :tabe ~/Dropbox/FUNProgramming/ehz_notebook/ehzNOTEBOOK.txt<cr>
-nnoremap <Leader>zi :set foldmethod=indent<CR>
-nnoremap <Leader>zs :set foldmethod=syntax<CR>
-nnoremap <Leader>zz :set foldclose=all<CR>:set foldcolumn=6<CR>
-nnoremap <Leader>zzz :set nofoldenable<CR>:set foldcolumn=0<CR>
+
+" function! Fold(value)
+" Cool folding function you can scale this function as per your need
+function! Fold(...)
+    " if a:value == 0
+    if exists("a:1")
+        let w:counter = a:1
+        let val=a:1
+        set foldclose=all
+        let &foldcolumn=w:counter
+    else
+        set nofoldenable
+        set foldcolumn=0
+    end
+endfunction
 
 " Auto change directory to match current file
 nnoremap ,wd :cd %:p:h<CR>:pwd<CR>
@@ -1192,6 +1203,7 @@ if has("spell")
 endif
 
 " Helpful for printing as a series
+" Inspired from vim official documentation
 function! Counter(...)
     if exists("a:1")
         let w:counter = a:1
@@ -1366,4 +1378,47 @@ cabb tabc tabclose
 let g:lt_location_list_toggle_map = '<leader>tl'
 " THis is only work on gvim or macvim
 let g:lt_quickfix_list_toggle_map = '<leader>tq'
+
+" @tpope vineger alternative
+" NETRW built in Project drawer
+" Quickly explore directory with Netrw, positioning cursor to the last file
+" www.vimcast.org Thanks to drew nil @thoughtbot
+" http://youtu.be/MGmIJyTf8pg for source of inspiration (tpope)
+" press - to go into Project drawer and <CR> to enter
+if !exists("g:loaded_vinegar") && empty(filter(split(&rtp, ','), "v:val =~ 'vinegar'"))
+  nnoremap <silent> -  :let g:netrw_last_file = expand('%:t')<CR>
+                      \:Explore<CR>
+                      \:exec ':'.search('\V'.escape(g:netrw_last_file, '\'))<CR>
+  let g:netrw_banner = 0
+  let g:netrw_sort_sequence = '*,\%(' . join(map(split(&suffixes, ','), 'escape(v:val, ".*$~")'), '\|') . '\)[*@]\=$'
+  " mix dotfiles with regular ones when sorting
+  au FileType netrw  let g:netrw_sort_options = 'i/['.g:netrw_sepchr.'._]\+/'
+                  \| let g:netrw_list_hide = '^\.\.\=/\=$,^\.'
+  let g:netrw_hide = 0
+endif
+
+
+" helper function to cycle through options
+" reference: http://cs.stanford.edu/~netj/
+fun! s:cycle(opt, values)
+  exec "let oldValue = &". a:opt
+  let idx = (index(a:values, oldValue) + 1) % len(a:values)
+  let newValue = a:values[idx]
+  exec "setlocal ". a:opt ."=". newValue
+  exec "setlocal ". a:opt ."?"
+endfun
+
+" Fold method
+nnoremap <leader>z    :call <SID>cycle("foldmethod", split("manual indent syntax"))<CR>
+" Virtualedit
+nnoremap <leader>ve   :call <SID>cycle("virtualedit", insert(split("all block insert onemore"), ""))<CR>
+
+" If you want to exclude * register
+" set clipboard=exclude:.*
+
+" some by-product files
+set suffixes-=.h
+set suffixes+=.o,.a     " object and archive files
+set suffixes+=.class    " Java classes
+set suffixes+=#         " Emacs auto backups
 
