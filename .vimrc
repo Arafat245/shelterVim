@@ -207,9 +207,7 @@ nnoremap <C-x> <C-w>x
 " ,,: line feed in normal
 " ,q: close tab
 " ,hz: my doc file
-" ,z : set automatic foldmethod
-" ,zz: set auto open and close folding
-" ,zzz: out from fold
+" ,z : Select foldmethod
 " ,tp: toggle paste mode
 " ,ts : SyntasticToggleMode
 
@@ -234,7 +232,7 @@ nnoremap <Leader>hz :tabe ~/Dropbox/FUNProgramming/ehz_notebook/ehzNOTEBOOK.txt<
 
 " function! Fold(value)
 " Cool folding function you can scale this function as per your need
-function! Fold(...)
+function! MyFold(...)
     " if a:value == 0
     if exists("a:1")
         let w:counter = a:1
@@ -246,7 +244,8 @@ function! Fold(...)
         set foldcolumn=0
     end
 endfunction
-
+command! -nargs=? MyFold call MyFold(<f-args>)
+"
 " Auto change directory to match current file
 nnoremap ,wd :cd %:p:h<CR>:pwd<CR>
 
@@ -504,8 +503,10 @@ set history=1000
 " promt user Confirmation
 set confirm
 
-" autoread from outside buffer
+" autoread and autowrite from outside buffer
+" default is off but for sanity
 set autoread
+set noautowrite
 
 " Indenting PARADIGM
 
@@ -1238,6 +1239,7 @@ function! Counter(...)
     inoremap <expr> <C-L> ListItem()
     inoremap <expr> <C-R> ListReset()
 endfunction
+command! -nargs=* MySeries call Counter(<f-args>)
 
 " Better backword deletion in insert mode
 inoremap <C-u> <C-g>u<C-u>
@@ -1422,3 +1424,10 @@ set suffixes+=.o,.a     " object and archive files
 set suffixes+=.class    " Java classes
 set suffixes+=#         " Emacs auto backups
 
+
+func! LessInitFunc()
+  set nocursorcolumn nocursorline nonumber
+endfunc
+command! LessInitFunc :call LessInitFunc()
+
+hi ColorColumn ctermbg=lightgrey guibg=lightgrey
