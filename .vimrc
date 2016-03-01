@@ -29,6 +29,8 @@ Plugin 'docunext/closetag.vim'
 Plugin 'hukl/Smyck-Color-Scheme'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'neitanod/vim-clevertab'
+Plugin 'Valloric/MatchTagAlways'
+Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'regedarek/ZoomWin'
 Plugin 'tpope/vim-ragtag'
 Plugin 'vim-airline/vim-airline-themes'
@@ -36,6 +38,7 @@ Plugin 'w0ng/vim-hybrid'
 " Plugins for javascript library and modern syntax
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'othree/html5.vim'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'tpope/vim-fugitive'
 " make your own text-object using regular expression
@@ -450,6 +453,8 @@ augroup sourceCodeRuby
   autocmd FileType ruby nnoremap <leader>a :call RubocopFix()<CR>
   autocmd FileType ruby nnoremap <leader>r :! ruby % <CR>
   " Ruby autocomplete OMNICOMPLETE
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+  autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
@@ -607,6 +612,7 @@ let g:airline#extensions#tabline#enabled = 1
 " Don't show seperators
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+" Use color for Airline Whatever you like
 let g:airline_theme='bubblegum'
 
 " Remove ALL autocommands to prevent them from being loaded twice.
@@ -1128,7 +1134,8 @@ augroup sourcePyTHON
     au BufRead,BufNewFile *.py,*.pyw let python_space_errors = 1
     " only UNIX line endings.
     au BufNewFile *.* set fileformat=unix
-    let g:syntastic_python_checkers = ['pyflakes']
+    let g:syntastic_python_checkers = ['flake8']
+    " let g:syntastic_python_checkers = ['pyflakes']
     autocmd BufRead *.py setlocal smartindent cinwords=if,else,elif,for,while,try,except,finally,def,class
 augroup END
 
@@ -1431,3 +1438,39 @@ endfunc
 command! LessInitFunc :call LessInitFunc()
 
 hi ColorColumn ctermbg=lightgrey guibg=lightgrey
+
+" " To bypass Syntastic
+" let g:syntastic_mode_map = {
+"        \ "mode": "active",
+"        \ "active_filetypes": [],
+"        \ "passive_filetypes": ["dart", "html"] }
+
+"
+"" Map Ctrl + S to save in any mode
+" " Sometimes Helps with autoread
+" you can omit silent IF you like
+nnoremap <silent> <C-S>   :update<CR>
+vnoremap <silent> <C-S>   <C-C>:update<CR>
+inoremap <silent> <C-S>   <C-O>:update<CR>
+
+" HTML5 othree
+" Disable event-handler attributes support:
+let g:html5_event_handler_attributes_complete = 0
+" Disable RDFa attributes support:
+let g:html5_rdfa_attributes_complete = 0
+" Disable microdata attributes support:
+let g:html5_microdata_attributes_complete = 0
+" Disable WAI-ARIA attribute support:
+let g:html5_aria_attributes_complete = 0
+
+
+" ACTIVATING META FOR vim-yankstack
+" for MAC
+" just use :set macmeta
+" It is cool Serially Maintain register 1, 2, 3, 4
+" see :reg for track
+execute "set <M-p>=\ep"
+execute "set <M-P>=\eP"
+
+" MatchTagALways
+let g:mta_use_matchparen_group = 0

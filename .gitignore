@@ -1,5 +1,6 @@
 *.pyc
 *.netrwhist
+*.log
 bundle/
 view/
 tmp/
