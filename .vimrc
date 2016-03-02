@@ -233,21 +233,35 @@ nnoremap <leader>tp  :set invpaste<CR>
 nnoremap <leader>q  :tabclose<CR>
 nnoremap <Leader>hz :tabe ~/Dropbox/FUNProgramming/ehz_notebook/ehzNOTEBOOK.txt<cr>
 
-" function! Fold(value)
 " Cool folding function you can scale this function as per your need
+" Any query email mechezawad@outlook.com
 function! MyFold(...)
-    " if a:value == 0
     if exists("a:1")
         let w:counter = a:1
-        let val=a:1
-        set foldclose=all
         let &foldcolumn=w:counter
+
+        if exists("a:2")
+            let w:level = a:2
+            " set foldnestmax
+            " vim default set to 20
+            let &foldnestmax=w:level
+        endif
+        if exists("a:3")
+            let w:closeMethod = a:3
+            let &foldclose=w:closeMethod
+        endif
+
+        if exists("a:4")
+            let w:openMethod = a:4
+            let &foldopen=w:openMethod
+        endif
+
     else
         set nofoldenable
         set foldcolumn=0
-    end
+    endif
 endfunction
-command! -nargs=? MyFold call MyFold(<f-args>)
+command! -nargs=* MyFold call MyFold(<f-args>)
 "
 " Auto change directory to match current file
 nnoremap ,wd :cd %:p:h<CR>:pwd<CR>
@@ -1468,9 +1482,50 @@ let g:html5_aria_attributes_complete = 0
 " for MAC
 " just use :set macmeta
 " It is cool Serially Maintain register 1, 2, 3, 4
+" And the register with cycle like YANK ring which is cool EMACS feature
 " see :reg for track
 execute "set <M-p>=\ep"
 execute "set <M-P>=\eP"
 
 " MatchTagALways
 let g:mta_use_matchparen_group = 0
+
+" tHIS FUNction
+" all credits to https://github.com/dhruvasagar
+function! NeatFoldText()
+  let line = ' ' . substitute(getline(v:foldstart), '^\s*"\?\s*\|\s*"\?\s*{{' . '{\d*\s*', '', 'g') . ' '
+  let lines_count = v:foldend - v:foldstart + 1
+  let lines_count_text = '| ' . printf("%10s", lines_count . ' lines') . ' |'
+  let foldchar = matchstr(&fillchars, 'fold:\zs.')
+  let foldtextstart = strpart('+' . repeat(foldchar, v:foldlevel*2) . line, 0, (winwidth(0)*2)/3)
+  let foldtextend = lines_count_text . repeat(foldchar, 8)
+  let foldtextlength = strlen(substitute(foldtextstart . foldtextend, '.', 'x', 'g')) + &foldcolumn
+  return foldtextstart . repeat(foldchar, winwidth(0)-foldtextlength) . foldtextend
+endfunction
+set foldtext=NeatFoldText()
+
+" case sensetative with ignore case on
+" ref:  http://vi.stackexchange.com/questions/4054/case-sensitive-with-ignorecase-on
+function! SearchCaseInsensetiveWithIgnore()
+    nnoremap <silent>  * :let @/='\C\<' . expand('<cword>') . '\>'<CR>:let v:searchforward=1<CR>n
+    nnoremap <silent>  # :let @/='\C\<' . expand('<cword>') . '\>'<CR>:let v:searchforward=0<CR>n
+    nnoremap <silent> g* :let @/='\C'   . expand('<cword>')       <CR>:let v:searchforward=1<CR>n
+    nnoremap <silent> g# :let @/='\C'   . expand('<cword>')       <CR>:let v:searchforward=0<CR>n
+endfunction
+command! SearchCaseInsensetiveWithIgnore call SearchCaseInsensetiveWithIgnore()
+
+
+" From source
+" Vim default visual search is not handy
+" www.vimcast.org
+" makes * and # work on visual mode too.
+function! s:VSetSearch(cmdtype)
+  let temp = @s
+  norm! gv"sy
+  let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+  let @s = temp
+endfunction
+
+xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+
