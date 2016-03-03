@@ -1467,9 +1467,13 @@ hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 "" Map Ctrl + S to save in any mode
 " " Sometimes Helps with autoread
 " you can omit silent IF you like
-nnoremap <silent> <C-S>   :update<CR>
-vnoremap <silent> <C-S>   <C-C>:update<CR>
-inoremap <silent> <C-S>   <C-O>:update<CR>
+" fucking Shit
+" stty -ixon
+" add above line in .bash_profile or .bashrc or .zshrc or .zprofile
+"
+nnoremap <C-s>   :update<CR>
+vnoremap <C-s>   <C-C>:update<CR>
+inoremap <C-s>   <C-O>:update<CR>
 
 " HTML5 othree
 " Disable event-handler attributes support:
