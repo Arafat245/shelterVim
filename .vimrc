@@ -238,26 +238,43 @@ nnoremap <Leader>hz :tabe ~/Dropbox/FUNProgramming/ehz_notebook/ehzNOTEBOOK.txt<
 function! MyFold(...)
     if exists("a:1")
         let w:counter = a:1
-        let &foldcolumn=w:counter
+        try
+            let &foldcolumn=w:counter
+        catch
+            execute "echom 'first parameter must be Integer!'"
+        endtry
 
         if exists("a:2")
             let w:level = a:2
             " set foldnestmax
             " vim default set to 20
-            let &foldnestmax=w:level
+            try
+                let &foldnestmax=w:level
+            catch
+                execute "echom 'second parameter must be Integer!'"
+            endtry
         endif
+
         if exists("a:3")
-            let w:closeMethod = a:3
-            let &foldclose=w:closeMethod
+            if a:3 == "all"
+                let w:closeMethod = a:3
+                let &foldclose=w:closeMethod
+            else
+                execute "echom 'third parameter will be all!'"
+            endif
         else
             set foldclose=
         endif
 
         if exists("a:4")
-            let w:openMethod = a:4
-            let &foldopen=w:openMethod
+            if a:4 == "all"
+                let w:openMethod = a:4
+                let &foldopen=w:openMethod
+            else
+                execute "echom 'fourth parameter will be all!'"
+            endif
         else
-            set foldopen=
+                set foldopen=
         endif
 
     else
