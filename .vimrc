@@ -249,11 +249,15 @@ function! MyFold(...)
         if exists("a:3")
             let w:closeMethod = a:3
             let &foldclose=w:closeMethod
+        else
+            set foldclose=
         endif
 
         if exists("a:4")
             let w:openMethod = a:4
             let &foldopen=w:openMethod
+        else
+            set foldopen=
         endif
 
     else
