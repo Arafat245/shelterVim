@@ -700,15 +700,15 @@ set sessionoptions-=buffers
 " Don't persist options and mappings because it can corrupt sessions.
 set sessionoptions-=options
 
-set viewoptions-=options
+" set viewoptions-=options
 
 augroup vimrc
     autocmd BufWritePost *
-    \   if expand('%') != '' && &buftype !~ 'nofile'
+    \   if expand('%') != '' && &buftype !~ 'nofile' && &buftype !~ 'readonly'
     \|      mkview
     \|  endif
     autocmd BufRead *
-    \   if expand('%') != '' && &buftype !~ 'nofile'
+    \   if expand('%') != '' && &buftype !~ 'nofile' && &buftype !~ 'readonly'
     \|      silent loadview
     \|  endif
 augroup END
