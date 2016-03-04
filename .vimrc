@@ -1005,6 +1005,7 @@ command! RubocopFix :call RubocopFix()
 " vim commentary
 autocmd FileType c,cpp,cs,java      setlocal commentstring=//\ %s
 autocmd FileType sql  setlocal commentstring=--\ %s
+autocmd FileType apache setlocal commentstring=#\ %s
 
 "using thoughtbot/vim-rspec and tpope/dispatch.
 let g:rspec_command = "Dispatch bin/rspec {spec}"
@@ -1076,9 +1077,10 @@ au BufRead,BufNewFile *.asm set filetype=nasm
 " like tree Data Structure
 set path=$PWD/**
 set path+=$HOME/**
-set path-=~/.vim/view/
+set path-=~/.vim/**
 set path-=~/.vim/bundle/
 set path+=/usr/include/c++/v1**
+set path+=/etc/**
 " set path+=/usr/local/include
 
 " best tab file navigation ,ft
