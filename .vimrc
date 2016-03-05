@@ -1556,3 +1556,7 @@ endfunction
 xnoremap * :<C-u>call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap # :<C-u>call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 
+" tern-project for JS
+let g:tern_show_argument_hints='on_hold'
+" and
+let g:tern_map_keys=1
