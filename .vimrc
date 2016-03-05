@@ -25,6 +25,8 @@ Plugin 'gmarik/Vundle.vim'
 " color schemes
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Valloric/ListToggle'
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/gist-vim'
 Plugin 'docunext/closetag.vim'
 Plugin 'hukl/Smyck-Color-Scheme'
 Plugin 'nanotech/jellybeans.vim'
@@ -625,8 +627,8 @@ set title
 " Use the system clipboard for yank / delete / paste operations
 if has('unnamedplus')
     " " System CLipboard and vim registers
-   " set clipboard=unnamedplus
-   set clipboard=unnamed
+   set clipboard=unnamedplus
+   " set clipboard=unnamed
 endif
 
 " ensure line numbers are viewable in translucent terminal windows
