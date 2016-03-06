@@ -1364,8 +1364,6 @@ xnoremap  y "+y
 " you will forget some mapping so read key map directly from plgin folder or
 " :h
 
-" Vim global plugin for restricting colon commands to visual blocks
-" vmap B is the mapping for blockwise.vim BY AUTHOR: DAMIAN CONOWAY
 "
 " CtrlP is not intended for hidden file ...You find rather
 " CtrlP.vim config
