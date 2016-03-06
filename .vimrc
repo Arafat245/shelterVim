@@ -460,6 +460,7 @@ augroup END
 augroup sourceCodePHP
   autocmd!
   autocmd FileType php nnoremap <leader>r :! php<space>
+  autocmd FileType php nnoremap <leader>rr :! php %<CR>
   " autocmd FileType php colo jellybeans
 augroup END
 
@@ -1566,3 +1567,56 @@ let g:tern_map_keys=1
 " better CTRLP
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 let g:ctrlp_match_window = 'top,order:ttb,min:1,max:10,results:10'
+
+" forget Undo History for the current file
+
+fun! <SID>ForgetUndo()
+    let old_ul = &undolevels
+    set undolevels=-1
+   exe "sil! normal a \<BS>\<Esc>"
+    w
+    let &undolevels = old_ul
+    unlet old_ul
+endfun
+com! -nargs=0 ForgetUndo call <SID>ForgetUndo()
+
+" show full definition from tag file
+set showfulltag
+
+" Insert current date and time quickly
+" 06 March 2016, 20:30:43
+
+iab NOWW <C-R>=strftime("%d %B %Y, %X")<CR>
+
+" Save session and Load session
+" source github
+set ssop=buffers,sesdir,tabpages,winpos,winsize
+
+com! -nargs=? SaveSession call s:SaveSession(<f-args>)
+com! -nargs=? LoadSession call s:LoadSession(<f-args>)
+
+fun! s:LoadSession(...)
+    let fname = '.session.vim'
+    if a:0 > 0
+        let fname = a:1
+    endif
+    let sfile = expand('%:p:h') . '/' . fname
+    if !filereadable(sfile)
+        let sfile = getcwd() . '/' . fname
+    endif
+    if filereadable(sfile)
+        exec 'sil! so ' . sfile
+    else
+        echo 'session file (' . sfile . ') not exists'
+    endif
+endfun
+
+fun! s:SaveSession(...)
+    let fname = '.session.vim'
+    if a:0 > 0
+        let fname = a:1
+    endif
+    let sfile = getcwd() . '/' . fname
+    exec 'sil! mks! ' . sfile
+    echo 'session saved: ' . sfile
+endfun

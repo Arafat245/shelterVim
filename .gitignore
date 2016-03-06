@@ -1,6 +1,9 @@
 *.pyc
 *.netrwhist
 *.log
+*.session.vim
+
+# folder ignore
 bundle/
 view/
 tmp/
