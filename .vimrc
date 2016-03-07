@@ -725,7 +725,8 @@ augroup vimrc
     \|  endif
 augroup END
 
-highlight Folded guibg=grey guifg=blue
+" this will only work in Gui Vim
+highlight Folded guibg=grey guifg=cyan
 highlight Foldcolumn guibg=darkgray guifg=white
 
 
