@@ -337,8 +337,15 @@ endfunction
 " Interesting and Advanced vim Configuration by Damiam Conway
 " Make the 81st column stand out
 
-highlight ColorColumn ctermbg=Gray
-call matchadd('ColorColumn', '\%81v', 100)
+function! ColumnLimit(...)
+    if exists("a:1")
+        highlight ColorColumn ctermbg=DarkGray
+        call matchadd('ColorColumn', '\%81v', 100)
+    else
+        set colorcolumn=
+    endif
+endfunction
+command! -nargs=? ColumnLimit call ColumnLimit(<f-args>)
 
 " setting personalized rulerformat
 set rulerformat=%15(%c%V\ %p%%%)
@@ -1166,7 +1173,7 @@ augroup sourcePyTHON
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     " this one is which you're most likely to use?
     autocmd FileType python highlight ColorColumn ctermfg=12, ctermbg=9
-    autocmd FileType python call matchadd('ColorColumn', '\%80v', 100)
+    autocmd FileType python call matchadd('ColorColumn', '\%81v', 100)
     " Display tabs at the beginning of a line in Python mode as bad
     au BufRead,BufNewFile *.py,*.pyw match ExtraWhitespace /^\t\+/
     " Make trailing whitespace be flagged as bad
@@ -1474,8 +1481,6 @@ func! LessInitFunc()
   set nocursorcolumn nocursorline nonumber
 endfunc
 command! LessInitFunc :call LessInitFunc()
-
-hi ColorColumn ctermbg=lightgrey guibg=lightgrey
 
 " " To bypass Syntastic
 " let g:syntastic_mode_map = {
