@@ -1398,7 +1398,7 @@ let g:ctrlp_switch_buffer = 'Et' " Jump to tab AND buffer if already open
 " Quicking autocomplete above and below line
 " Thanks to @thoughtbot
 inoremap <expr> <C-y> matchstr(getline(line('.') - 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
-inoremap <expr> <C-e> matchstr(getline(line('.') + 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
+inoremap <expr> <C-Y> matchstr(getline(line('.') + 1), '\%' . virtcol('.') . 'v\%(\k\+\\|.\)')
 " split WINDOW not always in EQUAL SIZE
 set noequalalways
 " Autocomplete with dictionary words when spell check is on
