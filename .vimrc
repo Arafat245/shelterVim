@@ -438,6 +438,9 @@ augroup sourceCodeC
   autocmd FileType c nnoremap <leader>nb :! clang -ggdb3 -O0 -std=c11 -Werror -Wall -pedantic-errors -o<space>
   " remember clang refactoring tools also supports for C11
   " you can use if you like
+
+  autocmd FileType c nnoremap <leader>ca :!clang --analyze -std=c11 -Xanalyzer -analyzer-output=text %<CR>
+  autocmd FileType c nnoremap <leader>cs :!clang -ggdb3 -O0 -std=c11 -fsanitize=address -lpthread % -o %:r<CR>
   autocmd FileType c nnoremap <leader>r :! ./
   autocmd FileType c nnoremap <leader>rr :! ./%:r<CR>
 augroup END
@@ -1050,7 +1053,7 @@ augroup Undouble_Completions
 augroup None
 
 function! Undouble_Completions ()
-    let col  = getpos('.')[2]
+    let col  = getpos('.')[3]
     let line = getline('.')
     call setline('.', substitute(line, '\(\k\+\)\%'.col.'c\zs\1', '', ''))
 endfunction
@@ -1635,3 +1638,7 @@ fun! s:SaveSession(...)
     echo 'session saved: ' . sfile
 endfun
 
+" and Tips
+" Don't map any <C-a> in Vim
+" Because It is Tmux prefix
+" check your mapping :map <C-a>
