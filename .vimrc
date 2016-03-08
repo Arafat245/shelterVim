@@ -24,6 +24,10 @@ Plugin 'gmarik/Vundle.vim'
 " Plugin 'lervag/vimtex'
 " color schemes
 Plugin 'altercation/vim-colors-solarized'
+" for Angular JS
+Plugin 'burnettk/vim-angular'
+" for coffee-script
+Plugin 'kchmck/vim-coffee-script'
 Plugin 'Valloric/ListToggle'
 Plugin 'mattn/webapi-vim'
 Plugin 'mattn/gist-vim'
@@ -491,8 +495,9 @@ command! JscsFix :call JscsFix()
 augroup sourceCodeJS
   autocmd!
   autocmd FileType javascript nnoremap <leader>r :! nodejs %<CR>
-  autocmd FileType javascript nnoremap <leader>a :call JscsFix()<CR>:w<CR>
-
+  autocmd FileType javascript nnoremap <leader>ja :call JscsFix()<CR>:w<CR>
+  autocmd FileType javascript nnoremap <leader>jh :!jshint %<CR>
+  " autocmd FileType javascript nnoremap <leader>jl :!jslint %<CR>
   " JscsFix command just before the buffer is written for *.js files"
   " autocmd BufWrite *.js JscsFix
 augroup END
@@ -765,6 +770,7 @@ augroup END
 augroup filetype_json
   autocmd!
   au BufRead,BufNewFile *.json set ft=json syntax=javascript
+    au FileType javascript setlocal suffixesadd=.js
 augroup END
 
 " Markdown
@@ -1137,10 +1143,10 @@ augroup Clang-format
     " you have config your own style .clang-format
     " Clang Format also work for Objective C JAVA
     " Clang-formating the current buffer
-    autocmd FileType c,cpp,cc,javascript nnoremap <leader>cf :!clang-format -i -style=WebKit %<CR>
-    autocmd FileType c,cpp,cc,javascript nnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
-    autocmd Filetype c,cpp,cc,javascript imap <C-L> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
-    autocmd FileType c,cpp,cc,javascript vnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    autocmd FileType c,cpp,cc nnoremap <leader>cf :!clang-format -i -style=WebKit %<CR>
+    autocmd FileType c,cpp,cc nnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    autocmd Filetype c,cpp,cc imap <C-L> <c-o>:pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
+    autocmd FileType c,cpp,cc vnoremap <leader>f :pyf /usr/share/vim/addons/syntax/clang-format-3.6.py<cr>
 augroup END
 
 "VIm autosave when loose focus
@@ -1495,16 +1501,13 @@ command! LessInitFunc :call LessInitFunc()
 "        \ "passive_filetypes": ["dart", "html"] }
 
 "
-"" Map Ctrl + S to save in any mode
+" for mapping control key
 " " Sometimes Helps with autoread
 " you can omit silent IF you like
 " fucking Shit
 " stty -ixon
 " add above line in .bash_profile or .bashrc or .zshrc or .zprofile
-"
-nnoremap <C-s>   :update<CR>
-vnoremap <C-s>   <C-C>:update<CR>
-inoremap <C-s>   <C-O>:update<CR>
+
 
 " HTML5 othree
 " Disable event-handler attributes support:
@@ -1642,3 +1645,6 @@ endfun
 " Don't map any <C-a> in Vim
 " Because It is Tmux prefix
 " check your mapping :map <C-a>
+"
+" Specific to angularJS
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
