@@ -1642,9 +1642,9 @@ fun! s:SaveSession(...)
 endfun
 
 " and Tips
-" Don't map any <C-a> in Vim
-" Because It is Tmux prefix
-" check your mapping :map <C-a>
+" Don't map any <C-s> in Vim
+" Because It is Tmux prefix or whatever
+" check your mapping :map <C-s>
 "
 " Specific to angularJS
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
