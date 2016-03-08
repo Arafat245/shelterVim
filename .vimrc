@@ -233,7 +233,7 @@ nnoremap <leader>G  <C-]>
 nnoremap <leader>ts :SyntasticToggleMode<CR>
 nnoremap <leader>tp  :set invpaste<CR>
 nnoremap <leader>q  :tabclose<CR>
-nnoremap <Leader>hz :tabe ~/Dropbox/FUNProgramming/ehz_notebook/ehzNOTEBOOK.txt<cr>
+nnoremap <Leader>hz :tabe ~/Dropbox/FUNProgramming/ehz_notebook/ehzNOTEBOOK.md<cr>
 
 " Cool folding function you can scale this function as per your need
 " Any query email mechezawad@outlook.com
