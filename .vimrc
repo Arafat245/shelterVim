@@ -430,7 +430,7 @@ let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 " Only works in vim --noplugin mode
 augroup htmlIndent
   autocmd!
-  autocmd BufWritePost *.html normal gg=G
+  autocmd filewritepost,Bufwritepost *.html normal gg=G
 augroup END
 
 " better for .c and .cpp build and run
