@@ -22,10 +22,12 @@ Plugin 'gmarik/Vundle.vim'
 
 " Vim Latex support
 " Plugin 'lervag/vimtex'
+" Facebook ReactJS
+Plugin 'mxw/vim-jsx'
 " color schemes
 Plugin 'altercation/vim-colors-solarized'
 " for Angular JS
-Plugin 'burnettk/vim-angular'
+" Plugin 'burnettk/vim-angular'
 " for coffee-script
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'Valloric/ListToggle'
@@ -50,16 +52,16 @@ Plugin 'tpope/vim-fugitive'
 " make your own text-object using regular expression
 " to learn about more about any plugin ...go to github.com
 Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
+" Plugin 'nelstrom/vim-textobj-rubyblock'
 " Specific to rails
 Plugin 'mhinz/vim-startify'
-Plugin 'ngmy/vim-rubocop'
-Plugin 'thoughtbot/vim-rspec'
+" Plugin 'ngmy/vim-rubocop'
+" Plugin 'thoughtbot/vim-rspec'
 Plugin 'tpope/vim-dispatch'
 Plugin 'tpope/vim-endwise'
-Plugin 'tpope/vim-rails'
+" Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'vim-ruby/vim-ruby'
+" Plugin 'vim-ruby/vim-ruby'
 " worked for java and scala
 Plugin 'tpope/vim-classpath'
 " plugins
@@ -496,28 +498,25 @@ augroup sourceCodeJS
   autocmd!
   autocmd FileType javascript nnoremap <leader>r :! nodejs %<CR>
   autocmd FileType javascript nnoremap <leader>ja :call JscsFix()<CR>:w<CR>
-  autocmd FileType javascript nnoremap <leader>jh :!jshint %<CR>
-  " autocmd FileType javascript nnoremap <leader>jl :!jslint %<CR>
   " JscsFix command just before the buffer is written for *.js files"
   " autocmd BufWrite *.js JscsFix
 augroup END
 
-augroup sourceCodeRuby
-  autocmd!
-  autocmd FileType ruby nnoremap <leader>ra :! rubocop % <CR>
-  autocmd FileType ruby nnoremap <leader>a :call RubocopFix()<CR>
-  autocmd FileType ruby nnoremap <leader>r :! ruby % <CR>
-  " Ruby autocomplete OMNICOMPLETE
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-  autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
-  autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
-  autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
-augroup END
+" augroup sourceCodeRuby
+"   autocmd!
+"   autocmd FileType ruby nnoremap <leader>ra :! rubocop % <CR>
+"   autocmd FileType ruby nnoremap <leader>a :call RubocopFix()<CR>
+"   autocmd FileType ruby nnoremap <leader>r :! ruby % <CR>
+"   " Ruby autocomplete OMNICOMPLETE
+"   autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"   autocmd FileType ruby,eruby setlocal omnifunc=rubycomplete#Complete
+"   autocmd FileType ruby,eruby let g:rubycomplete_buffer_loading = 1
+"   autocmd FileType ruby,eruby let g:rubycomplete_classes_in_global = 1
+"   autocmd FileType ruby,eruby let g:rubycomplete_rails = 1
+" augroup END
 
-augroup SourcePython
+augroup SourceEnding
     autocmd!
-    autocmd filetype python set expandtab
     set list
     set listchars=tab:>.,trail:.,extends:#,nbsp:.
 augroup END
@@ -949,24 +948,24 @@ nnoremap <silent> <leader>fc <ESC>/\v^[<=>]{7}( .*\|$)<CR>
 
 "Syntastics for ruby
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_eruby_ruby_quiet_messages =
-    \ {"regex": "possibly useless use of a variable in void context"}
+" let g:syntastic_eruby_ruby_quiet_messages =
+"     \ {"regex": "possibly useless use of a variable in void context"}
 
 
-" filetype for ruby stuff
-augroup myfiletypes
-  " Clear old autocmds in group
-  autocmd!
-  " autoindent with two spaces, always expand tabs
-  autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
-  autocmd FileType ruby,eruby,yaml setlocal path+=lib
-  autocmd FileType ruby compiler ruby
-  " Make ?s part of words
-  autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
+" " filetype for ruby stuff
+" augroup myfiletypes
+"   " Clear old autocmds in group
+"   autocmd!
+"   " autoindent with two spaces, always expand tabs
+"   autocmd FileType ruby,eruby,yaml setlocal ai sw=2 sts=2 et
+"   autocmd FileType ruby,eruby,yaml setlocal path+=lib
+"   autocmd FileType ruby compiler ruby
+"   " Make ?s part of words
+"   autocmd FileType ruby,eruby,yaml setlocal iskeyword+=?
 
-  " Clojure
-  autocmd FileType clojure map <Leader>tcl :!lein test<cr>
-augroup END
+"   " Clojure
+"   autocmd FileType clojure map <Leader>tcl :!lein test<cr>
+" augroup END
 
 
 command! Q q " Bind :Q to :q
@@ -980,7 +979,7 @@ let g:rspec_command = "Dispatch bin/rspec {spec}"
 
 set switchbuf=usetab,newtab
 
-let g:syntastic_ruby_mri_exec='/usr/bin/ruby'
+" let g:syntastic_ruby_mri_exec='/usr/bin/ruby'
 
 " autocomplete
 
@@ -1001,7 +1000,7 @@ let g:syntastic_style_warning_symbol = '!'
 
 let g:syntastic_html_checkers = []
 let g:syntastic_java_checkers = []
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+let g:syntastic_javascript_checkers = ['jscs', 'eslint']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_sh_checkers = ['shellcheck']
 
@@ -1643,4 +1642,32 @@ endfun
 " check your mapping :map <C-s>
 "
 " Specific to angularJS
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+"
+
+" REACTJS
+"
+" JSX (React) config
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+
+" via https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
+function! Quick_scope_selective(movement)
+    let needs_disabling = 0
+    if !g:qs_enable
+        QuickScopeToggle
+        redraw
+        let needs_disabling = 1
+    endif
+
+    let letter = nr2char(getchar())
+
+    if needs_disabling
+        QuickScopeToggle
+    endif
+
+    return a:movement . letter
+endfunction
+
+let g:qs_enable = 0
+
+" More to come
