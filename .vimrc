@@ -497,7 +497,7 @@ command! JscsFix :call JscsFix()
 augroup sourceCodeJS
   autocmd!
   autocmd FileType javascript nnoremap <leader>r :! nodejs %<CR>
-  autocmd FileType javascript nnoremap <leader>ja :call JscsFix()<CR>:w<CR>
+  " autocmd FileType javascript nnoremap <leader>ja :call JscsFix()<CR>:w<CR>
   " JscsFix command just before the buffer is written for *.js files"
   " autocmd BufWrite *.js JscsFix
 augroup END
@@ -564,7 +564,7 @@ set confirm
 
 " autoread and autowrite from outside buffer
 " default is off but for sanity
-set autoread
+" set autoread
 set noautowrite
 
 " Indenting PARADIGM
