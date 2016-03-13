@@ -23,11 +23,9 @@ Plugin 'gmarik/Vundle.vim'
 " Vim Latex support
 " Plugin 'lervag/vimtex'
 " Facebook ReactJS
-" Plugin 'mxw/vim-jsx'
+Plugin 'mxw/vim-jsx'
 " color schemes
 Plugin 'altercation/vim-colors-solarized'
-" for Angular JS
-Plugin 'burnettk/vim-angular'
 " for coffee-script
 Plugin 'kchmck/vim-coffee-script'
 Plugin 'Valloric/ListToggle'
@@ -158,8 +156,9 @@ endif
 " font options
 set background=dark
 set t_Co=256
-" colorscheme hybrid
-colorscheme smyck
+colorscheme hybrid
+" colorscheme smyck
+" colorscheme solarized
 
 " keep at least 5 lines below the cursor
 set scrolloff=5
@@ -1641,14 +1640,10 @@ endfun
 " Because It is Tmux prefix or whatever
 " check your mapping :map <C-s>
 "
-" Specific to angularJS
-" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-"
-
 " REACTJS
 "
 " JSX (React) config
-" let g:jsx_ext_required = 0 " Allow JSX in normal JS files
+let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
 " via https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
 function! Quick_scope_selective(movement)
