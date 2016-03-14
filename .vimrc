@@ -459,7 +459,7 @@ augroup sourceCodeCPP
 
   autocmd FileType cc,cpp nnoremap <leader>nb :! clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -Werror -Wself-assign -Wall -pedantic-errors -Wextra-tokens -Wambiguous-member-template -Wbind-to-temporary-copy -fdiagnostics-show-template-tree -ferror-limit=33 -ftemplate-backtrace-limit=13 -lpthread -l:libmagic.so.1 -o<space>
 
-  autocmd FileType cc,cpp nnoremap <silent> <leader>cm :!clang-modernize -for-compilers=clang-3.6.2 -summary %<CR>
+  autocmd FileType cc,cpp nnoremap <silent> <leader>cm :!clang-modernize -for-compilers=clang-3.6.2 -final-syntax-check -summary %<CR>
   autocmd FileType cc,cpp nnoremap <leader>ca :!clang++ --analyze -std=c++14 -stdlib=libc++ -Xanalyzer -analyzer-output=text %<CR>
   autocmd FileType cc,cpp nnoremap <leader>cs :!clang++ -ggdb3 -O0 -std=c++14 -stdlib=libc++ -lc++abi -fsanitize=address -lpthread % -o %:r<CR>
 
@@ -609,6 +609,7 @@ nnoremap <Leader>nn :call RenameFile()<cr>
 
 " Disable K looking stuff up
 nnoremap K <Nop>
+vnoremap K <Nop>
 
 "  >>>highlight cursorcolumn and cursorline and statusline and tabline
 
