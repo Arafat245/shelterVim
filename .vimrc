@@ -92,6 +92,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'junegunn/rainbow_parentheses.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'unblevable/quick-scope'
 
 call vundle#end()
 filetype plugin indent on
@@ -156,8 +157,8 @@ endif
 " font options
 set background=dark
 set t_Co=256
-colorscheme hybrid
-" colorscheme smyck
+" colorscheme hybrid
+colorscheme smyck
 " colorscheme solarized
 
 " keep at least 5 lines below the cursor
@@ -1646,7 +1647,12 @@ endfun
 " JSX (React) config
 let g:jsx_ext_required = 0 " Allow JSX in normal JS files
 
-" via https://gist.github.com/cszentkiralyi/dc61ee28ab81d23a67aa
+" Highlight when finding forword and backword
+let g:qs_enable = 0
+let g:qs_enable_char_list = [ 'f', 'F', 't', 'T' ]
+
+" dependencies of the plugin
+" Plugin 'unblevable/quick-scope'
 function! Quick_scope_selective(movement)
     let needs_disabling = 0
     if !g:qs_enable
@@ -1654,16 +1660,13 @@ function! Quick_scope_selective(movement)
         redraw
         let needs_disabling = 1
     endif
-
     let letter = nr2char(getchar())
-
     if needs_disabling
         QuickScopeToggle
     endif
-
     return a:movement . letter
 endfunction
 
-let g:qs_enable = 0
-
-" More to come
+for i in g:qs_enable_char_list
+    execute 'noremap <expr> <silent>' . i . " Quick_scope_selective('". i . "')"
+endfor
