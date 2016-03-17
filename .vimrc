@@ -497,7 +497,7 @@ command! JscsFix :call JscsFix()
 augroup sourceCodeJS
   autocmd!
   autocmd FileType javascript nnoremap <leader>r :! nodejs %<CR>
-  " autocmd FileType javascript nnoremap <leader>ja :call JscsFix()<CR>:w<CR>
+  autocmd FileType javascript nnoremap <leader>ja :call JscsFix()<CR>:w<CR>
   " JscsFix command just before the buffer is written for *.js files"
   " autocmd BufWrite *.js JscsFix
 augroup END
@@ -1001,7 +1001,9 @@ let g:syntastic_style_warning_symbol = '!'
 
 let g:syntastic_html_checkers = []
 let g:syntastic_java_checkers = []
-let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_javascript_checkers = ['jscs']
+let g:syntastic_javascript_checkers = ['jscs', 'eslint']
 let g:syntastic_json_checkers = ['jsonlint']
 let g:syntastic_sh_checkers = ['shellcheck']
 
